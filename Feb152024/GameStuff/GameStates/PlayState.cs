@@ -1,4 +1,5 @@
 ﻿using Feb152024.GameStuff.Enums;
+using Feb152024.GameStuff.GameLevels;
 using Feb152024.GameStuff.Statics;
 using Feb152024.GameStuff.Systems;
 using Microsoft.Xna.Framework;
@@ -16,7 +17,7 @@ namespace Feb152024.GameStuff.GameStates
     {
         Texture2D sky;
         SpriteFont font;
-        EnemySpawner enemySpawner = new EnemySpawner();
+        LevelManager levelManager = new LevelManager();
         CollisionDetector collisionDetector = new CollisionDetector();
         DeathDetector deathDetector = new DeathDetector();
         GameInitializer gameInitializer = new GameInitializer();
@@ -30,7 +31,7 @@ namespace Feb152024.GameStuff.GameStates
         public void Update(GameTime gameTime, GameStateManager gameStateManager)
         {
             gameInitializer.Initialize();
-            enemySpawner.Update(gameTime);
+            levelManager.Update(gameTime);
             collisionDetector.Update();
             collisionDetector.CheckCollisions();
             if (KeyBoardHelper.IsKeyPressed(Keys.P))
@@ -65,8 +66,9 @@ namespace Feb152024.GameStuff.GameStates
             }
             if (player != null)
             {
-                _spriteBatch.DrawString(font, "Ammo: " + player.Ammo, new Vector2(10, 10), Color.White);
+                _spriteBatch.DrawString(font, "Ammo: " + player.Ammo, new Vector2(10, 20), Color.White);
             }
+            levelManager.Draw(_spriteBatch);
         }
 
     }

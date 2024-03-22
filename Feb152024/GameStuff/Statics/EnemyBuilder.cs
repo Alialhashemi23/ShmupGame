@@ -92,5 +92,10 @@ namespace Feb152024.GameStuff.Statics
 
             return character;
         }
+
+        internal object AddEnemyData(object value, int x, int y)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

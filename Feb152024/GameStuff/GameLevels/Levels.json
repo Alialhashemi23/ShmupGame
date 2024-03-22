@@ -1,0 +1,17 @@
+{
+  "Level": 1,
+  "Enemies": [
+    {
+      "Name": "Tewi",
+      "SpawnTime": 1,
+      "X": 0,
+      "Y": 0
+    },
+    {
+      "Name": "Tewi",
+      "SpawnTime": 3,
+      "X": 300,
+      "Y": 0
+    }
+  ]
+}
