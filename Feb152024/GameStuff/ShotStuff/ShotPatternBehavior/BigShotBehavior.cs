@@ -10,9 +10,11 @@ namespace Feb152024.GameStuff.ShotStuff.ShotPatternBehavior
     public class BigShotBehavior : IShotPatternBehavior
     {
         private GameTimer timer;
-        public BigShotBehavior()
+        private int AdjustableTimer;
+        public BigShotBehavior(int adjustableTimer)
         {
-            timer = Globals.TimerSpawner.CreateTimer(500);
+            AdjustableTimer = adjustableTimer;
+            timer = Globals.TimerSpawner.CreateTimer(adjustableTimer);
         }
         public void Act(Shot shot)
         {
@@ -24,6 +26,11 @@ namespace Feb152024.GameStuff.ShotStuff.ShotPatternBehavior
                 shot.Location.Width += 5;
                 shot.Location.Height += 5;
             }
+        }
+
+        public IShotPatternBehavior ReturnSelf()
+        {
+            return new BigShotBehavior(AdjustableTimer);
         }
     }
 }

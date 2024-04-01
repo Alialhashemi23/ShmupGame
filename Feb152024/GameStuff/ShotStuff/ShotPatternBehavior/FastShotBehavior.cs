@@ -24,5 +24,10 @@ namespace Feb152024.GameStuff.ShotStuff.ShotPatternBehavior
                 shot.Speed *= 2;
             }
         }
+
+        public IShotPatternBehavior ReturnSelf()
+        {
+            return new FastShotBehavior();
+        }
     }
 }

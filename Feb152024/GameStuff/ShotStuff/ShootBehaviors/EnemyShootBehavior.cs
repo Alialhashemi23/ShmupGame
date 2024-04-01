@@ -1,4 +1,5 @@
 ﻿using Feb152024.GameStuff.CharacterBehaviors;
+using Feb152024.GameStuff.Entities;
 using Feb152024.GameStuff.Enums;
 using Feb152024.GameStuff.ShotStuff;
 using Feb152024.GameStuff.ShotStuff.ShotPatternBehavior;
@@ -11,21 +12,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Feb152024.GameStuff.EnemyBehaviors
+namespace Feb152024.GameStuff.ShotStuff.ShootBehaviors
 {
-    internal class EnemyShootBehavior : IBehavior
+    internal class EnemyShootBehavior : IShootBehavior
     {
-        private GameTimer timer;
+        private GameTimer Timer;
         private Shot Shot;
 
         public EnemyShootBehavior(int shootCoolDown, Shot shot)
         {
-            timer = Globals.TimerSpawner.CreateTimer(shootCoolDown);
+            Timer = Globals.TimerSpawner.CreateTimer(shootCoolDown);
             Shot = shot;
         }
         public void Act(Character character)
         {
-            if(timer.CheckTimer())
+            if (Timer.CheckTimer())
             {
                 Battlefield.Shots.Add(Shot.CreateShot(character, ShotTypeEnum.Enemy));
             };

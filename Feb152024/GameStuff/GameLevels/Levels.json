@@ -5,13 +5,57 @@
       "Name": "Tewi",
       "SpawnTime": 1,
       "X": 0,
-      "Y": 0
+      "Y": 0,
+      "Classification": "Enemy"
     },
     {
       "Name": "Tewi",
       "SpawnTime": 3,
       "X": 300,
-      "Y": 0
+      "Y": 0,
+      "Classification": "Enemy"
+    },
+    {
+      "Name": "Tewi",
+      "SpawnTime": 3,
+      "X": 540,
+      "Y": 0,
+      "Classification": "Enemy"
+    },
+    {
+      "Name": "Tewi",
+      "SpawnTime": 4,
+      "X": 300,
+      "Y": 0,
+      "Classification": "Enemy"
+    },
+    {
+      "Name": "Tewi",
+      "SpawnTime": 5,
+      "X": 500,
+      "Y": 0,
+      "Classification": "Enemy"
+    },
+    {
+      "Name": "Tewi",
+      "SpawnTime": 7,
+      "X": 400,
+      "Y": 0,
+      "Classification": "Enemy"
+    },
+    {
+      "Name": "Tewi",
+      "SpawnTime": 9,
+      "X": 200,
+      "Y": 0,
+      "Classification": "Enemy"
+    },
+    {
+      "Name": "Marisa",
+      "SpawnTime": 13,
+      "X": 200,
+      "Y": 0,
+      "Classification": "Boss"
     }
   ]
 }

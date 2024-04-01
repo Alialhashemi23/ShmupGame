@@ -1,4 +1,5 @@
 ﻿using Feb152024.GameStuff.CharacterBehaviors;
+using Feb152024.GameStuff.Entities;
 using Feb152024.GameStuff.Enums;
 using Feb152024.GameStuff.ShotStuff.ShotPatternBehavior;
 using Feb152024.GameStuff.Statics;
@@ -46,10 +47,10 @@ namespace Feb152024.GameStuff.ShotStuff
         public Shot CreateShot(Character character, ShotTypeEnum shotTypeEnum)
         {
             Shot shot = new Shot(Globals.ContentManager.Load<Texture2D>(Texture.Name),
-                     new Rectangle(character.Location.X + character.Location.Width / 2, character.Location.Y, 4, 4),
-                     character.Speed,
-                     shotTypeEnum,
-                     ShotPatternBehavior);
+                                 new Rectangle(character.Location.X + character.Location.Width / 2, character.Location.Y, 4, 4),
+                                 character.Speed,
+                                 shotTypeEnum,
+                                 ShotPatternBehavior.ReturnSelf());
 
             return shot;
         }

@@ -1,7 +1,9 @@
 ﻿using Feb152024.GameStuff.CharacterBehaviors;
 using Feb152024.GameStuff.EnemyBehaviors;
+using Feb152024.GameStuff.Entities;
 using Feb152024.GameStuff.Enums;
 using Feb152024.GameStuff.ShotStuff;
+using Feb152024.GameStuff.ShotStuff.ShootBehaviors;
 using Feb152024.GameStuff.ShotStuff.ShotPatternBehavior;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,26 +19,30 @@ namespace Feb152024.GameStuff.Statics
     public class EnemyBuilder
     {
         private string Name;
-        private int LocX, LocY;
-        private int ShotCoolDown;
+        private int LocX, LocY, Width, Height, HP;
         private CharacterTypeEnum CharacterType;
         private List<IBehavior> behaviors = new List<IBehavior>();
-        private List<IShotPatternBehavior> shotPatternBehaviors = new List<IShotPatternBehavior>();
-
+        private List<ISlave> slaves = new List<ISlave>();
+        
         private static Dictionary<Enemies, string> enemies = new Dictionary<Enemies, string>()
         {
             { Enemies.Tewi, "tewi" },
+            {Enemies.Marisa, "marisa" },
+            {Enemies.Reisen, "reisen" }
         };
 
         public EnemyBuilder()
         {
         }
 
-        public EnemyBuilder AddEnemyData(Enemies name, int x, int y)
+        public EnemyBuilder AddEnemyData(Enemies name, int x, int y, int width, int height, int hp)
         {
             Name = enemies[name];
             LocX = x;
             LocY = y;
+            Width = width;
+            Height = height;
+            HP = hp;
 
             return this;
         }
@@ -48,14 +54,6 @@ namespace Feb152024.GameStuff.Statics
             return this;
         }
 
-        public EnemyBuilder AddShotBehavior(IShotPatternBehavior behavior, int shotCoolDown)
-        {
-            ShotCoolDown = shotCoolDown;
-            shotPatternBehaviors.Add(behavior);
-
-            return this;
-        }
-
         public EnemyBuilder AddCharacterType(CharacterTypeEnum characterType)
         {
             CharacterType = characterType;
@@ -63,39 +61,45 @@ namespace Feb152024.GameStuff.Statics
             return this;
         }
 
-        private void CreateShootBehavior()
+       
+        public EnemyBuilder AddShotBehavior(IShotPatternBehavior behavior, int shotCoolDown)
         {
-            if(CharacterType == CharacterTypeEnum.Enemy)
+            if (CharacterType == CharacterTypeEnum.Enemy)
             {
-                var enemyshootbehavior = new EnemyShootBehavior(ShotCoolDown, new Shot(Globals.ContentManager.Load<Texture2D>("Shot"),
-                                                    new Rectangle(0, 0, 4, 4),
-                                                    5,
-                                                    ShotTypeEnum.Enemy,
-                                                    shotPatternBehaviors.FirstOrDefault()
-                                                    ));
-                behaviors.Add(enemyshootbehavior);
+                var enemyshootbehavior = new EnemyShootBehavior(shotCoolDown,
+                                                                   new Shot(Globals.ContentManager.Load<Texture2D>("Shot"),
+                                                                            new Rectangle(0, 0, 4, 4),
+                                                                            5,
+                                                                            ShotTypeEnum.Enemy,
+                                                                            behavior));
+                slaves.Add(new Slave(enemyshootbehavior));
             }
-            else
+            else if(CharacterType == CharacterTypeEnum.Player)
             {
 
+                var playershootbehavior = new ShootBehavior(shotCoolDown,
+                                                                   new Shot(Globals.ContentManager.Load<Texture2D>("Shot"),
+                                                                            new Rectangle(0, 0, 4, 4),
+                                                                            5,
+                                                                            ShotTypeEnum.Player,
+                                                                            behavior));
+                slaves.Add(new Slave(playershootbehavior));
             }
+
+            return this;
         }
 
         public Character BuildEnemy()
         {
-            CreateShootBehavior();
             var character = new Character(
                 Globals.ContentManager.Load<Texture2D>(Name),
-                new Rectangle(LocX,LocY,50,75),
+                new Rectangle(LocX,LocY,Width,Height),
                 behaviors,
-                CharacterType);
+                slaves,
+                CharacterType,
+                HP);
 
             return character;
-        }
-
-        internal object AddEnemyData(object value, int x, int y)
-        {
-            throw new NotImplementedException();
         }
     }
 }

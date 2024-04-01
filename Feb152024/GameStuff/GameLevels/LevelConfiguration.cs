@@ -18,6 +18,7 @@ namespace Feb152024.GameStuff.GameLevels
         public int SpawnTime { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public string Classification { get; set; }
         public bool Spawned = false;
     }
 }

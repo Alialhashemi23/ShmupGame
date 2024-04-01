@@ -1,4 +1,5 @@
-﻿using Feb152024.GameStuff.ShotStuff;
+﻿using Feb152024.GameStuff.Entities;
+using Feb152024.GameStuff.ShotStuff;
 using System;
 using System.Collections.Generic;
 using System.Linq;

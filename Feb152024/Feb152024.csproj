@@ -17,6 +17,11 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Extensions\EnumExtensions.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="GameStuff\GameLevels\Levels.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

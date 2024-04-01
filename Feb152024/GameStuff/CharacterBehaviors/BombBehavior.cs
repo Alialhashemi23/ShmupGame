@@ -1,4 +1,5 @@
-﻿using Feb152024.GameStuff.Enums;
+﻿using Feb152024.GameStuff.Entities;
+using Feb152024.GameStuff.Enums;
 using Feb152024.GameStuff.Statics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;

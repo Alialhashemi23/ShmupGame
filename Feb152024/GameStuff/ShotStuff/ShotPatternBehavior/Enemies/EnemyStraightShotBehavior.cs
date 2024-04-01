@@ -12,5 +12,10 @@ namespace Feb152024.GameStuff.ShotStuff.ShotPatternBehavior.Enemies
         {
             shot.Location.Y += shot.Speed;
         }
+
+        public IShotPatternBehavior ReturnSelf()
+        {
+            return new EnemyStraightShotBehavior();
+        }
     }
 }

@@ -40,12 +40,12 @@ namespace Feb152024.GameStuff.GameLevels
         {
             LevelTimer += (double)gameTime.ElapsedGameTime.TotalSeconds;
 
-            foreach (var enemy in Levels.Enemies)
+            foreach (var enemy in Levels.Enemies.Where(x => x.Classification == "Enemy"))
             {
-                if((int)LevelTimer == enemy.SpawnTime && enemy.Spawned == false)
+                if ((int)LevelTimer == enemy.SpawnTime && enemy.Spawned == false)
                 {
                     EnemyBuilder EnemyBuilder = new EnemyBuilder();
-                    var characters = EnemyBuilder.AddEnemyData(enemy.Name.ParseEnum<Enemies>(), enemy.X, enemy.Y)
+                    var characters = EnemyBuilder.AddEnemyData(enemy.Name.ParseEnum<Enemies>(), enemy.X, enemy.Y, 50, 75, 1)
                                                  .AddCharacterType(CharacterTypeEnum.Enemy)
                                                  .AddBehavior(new EnemyDownBehavior())
                                                  .AddShotBehavior(new EnemyStraightShotBehavior(), 1000)
@@ -54,6 +54,19 @@ namespace Feb152024.GameStuff.GameLevels
                     Battlefield.Characters.Add(characters);
                     enemy.Spawned = true;
                 }
+            }
+            if(Levels.Enemies.Where(x => x.Classification == "Enemy").All(x => x.Spawned == true) &&
+               Battlefield.Characters.Where(x => x.Type == CharacterTypeEnum.Enemy).Count() <= 0)
+            {
+                EnemyBuilder enemyBuilder = new EnemyBuilder();
+                var boss = Levels.Enemies.Where(x => x.Classification== "Boss").FirstOrDefault();
+                var characters = enemyBuilder.AddEnemyData(boss.Name.ParseEnum<Enemies>(), boss.X, boss.Y, 100, 100, 100)
+                             .AddCharacterType(CharacterTypeEnum.Enemy)
+                             .AddBehavior(new BossMoveBehavior(2500))
+                             .AddShotBehavior(new ZigZagShotBehavior(150, true), 1200)
+                             .BuildEnemy();
+
+                Battlefield.Characters.Add(characters);
             }
 
             //if (timer.CheckTimer())
@@ -66,7 +79,7 @@ namespace Feb152024.GameStuff.GameLevels
             //                                 .BuildEnemy();
 
             //    Battlefield.Characters.Add(characters);
-            //}
+        
         }
 
         public void Draw(SpriteBatch spriteBatch)

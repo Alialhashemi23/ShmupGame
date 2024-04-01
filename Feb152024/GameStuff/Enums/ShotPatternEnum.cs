@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Feb152024.GameStuff.Enums
 {
-    public enum Enemies
+    public enum ShotPatternEnum
     {
-        Tewi,
-        Marisa,
-        Reisen
+        Big,
+        Zigzag,
+        Fast,
+        Straight
     }
 }

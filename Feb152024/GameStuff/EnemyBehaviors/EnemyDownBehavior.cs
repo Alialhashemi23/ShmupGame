@@ -1,4 +1,5 @@
 ﻿using Feb152024.GameStuff.CharacterBehaviors;
+using Feb152024.GameStuff.Entities;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;

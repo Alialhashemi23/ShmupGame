@@ -10,5 +10,6 @@ namespace Feb152024.GameStuff.ShotStuff.ShotPatternBehavior
     public interface IShotPatternBehavior
     {
         public void Act(Shot shot);
+        public IShotPatternBehavior ReturnSelf();
     }
 }
